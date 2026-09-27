@@ -1,0 +1,10 @@
+{
+    "clientes": [
+        {
+            "id": "2",
+            "nombre": "juan manuel castro",
+            "estado": "activo",
+            "riesgo": "bajo"
+        }
+    ]
+}
