@@ -1,16 +1,13 @@
-"""Panel del instructor de ForceTech."""
-import json
 import os
+import json
 from datetime import date
+
 
 DB_FILE = "database.json"
 
 
-from clientes import cargar_datos, guardar_datos
-from matriculas import matricula_vigente
-
-
 def cargar_datos():
+
     if not os.path.exists(DB_FILE):
         return {
             "clientes": [],
@@ -20,7 +17,9 @@ def cargar_datos():
             "asistencias": [],
             "progresos": []
         }
+
     try:
+
         with open(DB_FILE, "r", encoding="utf-8") as archivo:
             datos = json.load(archivo)
 
@@ -32,9 +31,11 @@ def cargar_datos():
         datos.setdefault("progresos", [])
 
         return datos
-    
-    except (json.JSONDecodeError, IOError):
-        print("Error al cargar los datos. Se utilizarán datos vacíos.")
+
+    except json.JSONDecodeError:
+
+        print("Error: database.json tiene un formato incorrecto.")
+
         return {
             "clientes": [],
             "servicios": [],
@@ -45,82 +46,155 @@ def cargar_datos():
         }
 
 
-def _buscar_por_id(registros, identificador):
-    """Busca un registro por su ID."""
-    return next(
-        (
-            registro
-            for registro in registros
-            if str(registro.get("id")) == str(identificador)
-        ),
-        None,
-    )
+def guardar_datos(datos):
+
+    with open(DB_FILE, "w", encoding="utf-8") as archivo:
+        json.dump(datos, archivo, indent=4, ensure_ascii=False)
 
 
+def buscar_por_id(lista, id_buscado):
+
+    for elemento in lista:
+
+        if str(elemento.get("id")) == str(id_buscado):
+            return elemento
+
+    return None
 
 
-def obtener_clientes_asignados(id_instructor):
-    """Devuelve los clientes asignados al instructor."""
+def ver_clases_asignadas(id_instructor):
+
     datos = cargar_datos()
 
-    clientes = []
+    instructor = buscar_por_id(
+        datos["instructores"],
+        id_instructor
+    )
+
+    if instructor is None:
+        print("No se encontró el instructor.")
+        return
+
+    print("\n===== MIS CLASES ASIGNADAS =====")
+
+    print("Instructor:", instructor["nombre"])
+
+    encontro = False
 
     for matricula in datos["matriculas"]:
-        if (
-            str(matricula.get("id_instructor")) == str(id_instructor)
-            and matricula_vigente(matricula)
-        ):
-            cliente = _buscar_por_id(
-                datos["clientes"],
-                matricula.get("id_cliente")
+
+        if str(matricula["id_instructor"]) != str(id_instructor):
+            continue
+
+        if matricula["estado"] != "Activa":
+            continue
+
+        cliente = buscar_por_id(
+            datos["clientes"],
+            matricula["id_cliente"]
+        )
+
+        servicio = buscar_por_id(
+            datos["servicios"],
+            matricula["id_servicio"]
+        )
+
+        if cliente and servicio:
+
+            print("\nCliente:", cliente["nombre"])
+            print("Servicio:", servicio["nombre"])
+            print("Fecha de inicio:", matricula["fecha_inicio"])
+            print(
+                "Duración:",
+                matricula["duracion_semanas"],
+                "semanas"
             )
 
-            if cliente and cliente not in clientes:
-                clientes.append(cliente)
+            encontro = True
 
-    return clientes
+    if not encontro:
+        print("No tienes clientes asignados.")
 
 
 def registrar_asistencia(id_instructor):
-    """Registra la asistencia de un cliente asignado."""
+
     datos = cargar_datos()
 
-    clientes = obtener_clientes_asignados(id_instructor)
+    instructor = buscar_por_id(
+        datos["instructores"],
+        id_instructor
+    )
 
-    print("\n" + "=" * 55)
-    print("REGISTRAR ASISTENCIA".center(55))
-    print("=" * 55)
+    if instructor is None:
+        print("No se encontró el instructor.")
+        return
 
-    if not clientes:
+    print("\n===== REGISTRAR ASISTENCIA =====")
+    print("Instructor:", instructor["nombre"])
+
+    clientes_asignados = []
+
+    for matricula in datos["matriculas"]:
+
+        if str(matricula["id_instructor"]) == str(id_instructor):
+
+            if matricula["estado"] == "Activa":
+
+                cliente = buscar_por_id(
+                    datos["clientes"],
+                    matricula["id_cliente"]
+                )
+
+                if cliente:
+                    clientes_asignados.append(cliente)
+
+    if not clientes_asignados:
+
         print("No tienes clientes asignados.")
         return
 
-    print("\nCLIENTES ASIGNADOS:")
+    print("\nClientes asignados:")
 
-    for cliente in clientes:
+    for cliente in clientes_asignados:
+
         print(
-            f"ID {cliente.get('id')}: "
-            f"{cliente.get('nombre', 'Sin nombre')}"
+            f"ID: {cliente['id']} | "
+            f"Nombre: {cliente['nombre']}"
         )
 
-    id_cliente = input("\nIngrese el ID del cliente: ").strip()
+    id_cliente = input(
+        "\nIngrese el ID del cliente: "
+    ).strip()
 
-    cliente = _buscar_por_id(clientes, id_cliente)
+    cliente = buscar_por_id(
+        clientes_asignados,
+        id_cliente
+    )
 
     if cliente is None:
-        print("El cliente no está asignado a este instructor.")
+
+        print(
+            "Ese cliente no está asignado "
+            "a este instructor."
+        )
+
         return
 
     print("\n1. Presente")
     print("2. Ausente")
 
-    opcion = input("Seleccione una opción: ").strip()
+    opcion = input("Seleccione: ").strip()
 
     if opcion == "1":
+
         estado = "Presente"
+
     elif opcion == "2":
+
         estado = "Ausente"
+
     else:
+
         print("Opción inválida.")
         return
 
@@ -135,60 +209,85 @@ def registrar_asistencia(id_instructor):
 
     guardar_datos(datos)
 
-    print(
-        f"\nAsistencia registrada para "
-        f"{cliente['nombre']}: {estado}."
-    )
+    print("\nAsistencia registrada correctamente.")
 
 
 def registrar_evaluacion(id_instructor):
-    """Registra una evaluación del progreso físico del cliente."""
+
     datos = cargar_datos()
 
-    clientes = obtener_clientes_asignados(id_instructor)
+    instructor = buscar_por_id(
+        datos["instructores"],
+        id_instructor
+    )
 
-    print("\n" + "=" * 55)
-    print("EVALUACIÓN DEL PROGRESO FÍSICO".center(55))
-    print("=" * 55)
+    if instructor is None:
 
-    if not clientes:
+        print("No se encontró el instructor.")
+        return
+
+    print("\n===== EVALUAR PROGRESO =====")
+
+    clientes_asignados = []
+
+    for matricula in datos["matriculas"]:
+
+        if str(matricula["id_instructor"]) == str(id_instructor):
+
+            if matricula["estado"] == "Activa":
+
+                cliente = buscar_por_id(
+                    datos["clientes"],
+                    matricula["id_cliente"]
+                )
+
+                if cliente:
+                    clientes_asignados.append(cliente)
+
+    if not clientes_asignados:
+
         print("No tienes clientes asignados.")
         return
 
-    print("\nCLIENTES ASIGNADOS:")
+    for cliente in clientes_asignados:
 
-    for cliente in clientes:
         print(
-            f"ID {cliente.get('id')}: "
-            f"{cliente.get('nombre', 'Sin nombre')}"
+            f"ID: {cliente['id']} | "
+            f"Nombre: {cliente['nombre']}"
         )
 
-    id_cliente = input("\nIngrese el ID del cliente: ").strip()
+    id_cliente = input(
+        "\nIngrese el ID del cliente: "
+    ).strip()
 
-    cliente = _buscar_por_id(clientes, id_cliente)
+    cliente = buscar_por_id(
+        clientes_asignados,
+        id_cliente
+    )
 
     if cliente is None:
-        print("El cliente no está asignado a este instructor.")
+
+        print("Cliente no encontrado.")
         return
 
-    while True:
-        entrada = input(
-            "Ingrese el progreso físico (0 a 100 %): "
-        ).strip()
+    try:
 
-        try:
-            porcentaje = float(entrada.replace(",", "."))
+        porcentaje = float(
+            input("Porcentaje de progreso (0-100): ")
+        )
 
-            if 0 <= porcentaje <= 100:
-                break
+    except ValueError:
 
-        except ValueError:
-            pass
+        print("Debe ingresar un número.")
+        return
 
-        print("Error: ingrese un número entre 0 y 100.")
+    if porcentaje < 0 or porcentaje > 100:
+
+        print("El porcentaje debe estar entre 0 y 100.")
+        return
 
     observacion = input(
-        "Observación sobre el progreso: "
+        "Observación: "
     ).strip()
 
     progreso = {
@@ -203,43 +302,36 @@ def registrar_evaluacion(id_instructor):
 
     guardar_datos(datos)
 
-    print(
-        f"\nEvaluación registrada correctamente "
-        f"para {cliente['nombre']}."
-    )
+    print("\nEvaluación registrada correctamente.")
 
 
 def ver_asistencias(id_instructor):
-    """Muestra las asistencias registradas por el instructor."""
+
     datos = cargar_datos()
 
-    asistencias = [
-        asistencia
-        for asistencia in datos["asistencias"]
-        if str(asistencia.get("id_instructor")) == str(id_instructor)
-    ]
+    print("\n===== HISTORIAL DE ASISTENCIAS =====")
 
-    print("\n" + "=" * 55)
-    print("HISTORIAL DE ASISTENCIAS".center(55))
-    print("=" * 55)
+    encontro = False
 
-    if not asistencias:
+    for asistencia in datos["asistencias"]:
+
+        if str(asistencia["id_instructor"]) == str(id_instructor):
+
+            cliente = buscar_por_id(
+                datos["clientes"],
+                asistencia["id_cliente"]
+            )
+
+            if cliente:
+
+                print(
+                    f"Cliente: {cliente['nombre']} | "
+                    f"Fecha: {asistencia['fecha']} | "
+                    f"Estado: {asistencia['estado']}"
+                )
+
+                encontro = True
+
+    if not encontro:
+
         print("No hay asistencias registradas.")
-        return
-
-    for asistencia in asistencias:
-        cliente = _buscar_por_id(
-            datos["clientes"],
-            asistencia.get("id_cliente")
-        )
-
-        nombre = (
-            cliente.get("nombre", "Desconocido")
-            if cliente else "Desconocido"
-        )
-
-        print(
-            f"\nCliente: {nombre}"
-            f"\nFecha: {asistencia.get('fecha')}"
-            f"\nEstado: {asistencia.get('estado')}"
-        )
