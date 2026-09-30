@@ -4,7 +4,6 @@ import os
 DB_FILE = "database.json"
 
 def cargar_datos():
-    """Carga los datos desde el archivo JSON de forma segura."""
     if not os.path.exists(DB_FILE):
         return {"clientes": []}
     try:
@@ -52,7 +51,27 @@ def registrar_cliente():
     datos["clientes"].append(nuevo_cliente)
 
     guardar_datos(datos)
-    print("\nCliente registrado y guardado en el archivo JSON con éxito")
+    print("\nÉxito, Cliente registrado y guardado en el archivo JSON con éxito.")
 
-if __name__ == "__main__":
-    registrar_cliente()
+def ver_prioridad():
+    datos = cargar_datos()
+    clientes = datos.get("clientes", [])
+    
+    print("\n LISTA DE CLIENTES Y ESTADOS ")
+    if not clientes:
+        print("No hay clientes registrados todavía.")
+        return
+        
+    for c in clientes:
+        print(f"ID: {c['id']} | Nombre: {c['nombre']} | Estado: {c['estado']} | Riesgo: {c['riesgo']}")
+        def ver_prioridad():
+            datos = cargar_datos()
+            clientes = datos.get("clientes", [])
+    
+    print("\n--- LISTA DE CLIENTES Y ESTADOS ---")
+    if not clientes:
+        print("No hay clientes registrados todavía.")
+        return
+        
+    for c in clientes:
+        print(f"ID: {c['id']} | Nombre: {c['nombre']} | Estado: {c['estado']} | Riesgo: {c['riesgo']}")

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Proyecto_SCRUM
-Software de gestión para el Gimnasio ForceTech desarrollado con SCRUM. Incluye módulos de matrícula, control de aforo en clases, roles de usuario y generación de reportes.
-=======
 # Sistema de Gestión - Gimnasio ForceTech 
 
 Este proyecto es un sistema de software diseñado para gestionar de manera eficiente las inscripciones, los servicios ofrecidos, los instructores y el seguimiento del progreso físico de los clientes del Gimnasio ForceTech. 
@@ -44,4 +40,19 @@ Para mantener un historial limpio, el equipo utiliza el siguiente estándar para
 - `fix:` Corrección de errores (ej. `fix(json): solucionar lectura de archivo vacio`).
 - `docs:` Cambios en la documentación o README (ej. `docs(bitacora): actualizar bitacora del dia 1`).
 - `chore:` Tareas de mantenimiento o configuración (ej. `chore(setup): agregar archivo .gitignore`).
->>>>>>> feature/castro
+### Día 2 - Domingo 27 de septiembre
+* **¿Qué hicimos?** Estructuración modular del software (`menu.py`, `clientes.py`, persistencia de datos en `database.json`) y configuración del archivo `.gitignore` para ignorar carpetas del sistema como `__pycache__/`.
+* **¿Qué estamos estudiando/preparando?** Configuración de bucles de control (`while`, condicionales `if/elif`) y gestión de rutas de importación entre archivos de Python en la misma carpeta.
+* **Problemas presentados (Impedimentos):** 
+  - Conflicto de fusión (*Merge Conflict*) en el archivo `README.md` al intentar sincronizar las ramas local y remota. 
+  - Bloqueo temporal al hacer el `git push` debido a que existían cambios pendientes sin resolver ni aceptar en la interfaz de conflictos de VS Code. Se solucionó aceptando los cambios entrantes (*Accept Incoming Change*), limpiando los marcadores de conflicto y confirmando los commits correspondientes (`git add`, `git commit`).
+* **Evidencia:**
+![Estructura modular y menú en consola](![alt text](image.png))
+### Día 3 - Lunes 28 de septiembre
+* **¿Qué hicimos?** Refactorización del código base hacia una estructura modular limpia (`menu.py` y `clientes.py`) y sincronización con la persistencia en `database.json`.
+* **¿Qué estamos estudiando/preparando?** Manejo de importaciones entre archivos locales de Python, validaciones de entrada (`isdigit`, `isalpha`) y depuración de errores de importación (`ImportError`).
+* **Problemas presentados (Impedimentos):** 
+  - Error de importación (`ImportError: cannot import name 'ver_prioridad'`) al intentar vincular el menú con el módulo de clientes debido a que la función faltaba en el archivo secundario. 
+  - Se solucionó añadiendo la función de consulta en `clientes.py` y asegurando que las rutas de los archivos estuvieran en el mismo directorio de trabajo.
+* **Evidencia:**
+![Estructura modular y depuración de código](./evidencias/dia3_refactor.png)
