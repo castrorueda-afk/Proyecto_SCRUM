@@ -5,6 +5,7 @@ from pathlib import Path
 # Agrega la carpeta principal del proyecto a la ruta de Python.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from panel import menu_instructor
 from clientes import registrar_cliente
 from matriculas import (
     registrar_instructor,
@@ -49,13 +50,15 @@ def mostrar_menu():
     print("6. Registrar progreso de cliente")
     print("7. Registrar servicios o instructores")
     print("8. Salir")
+    print("9. Panel de instructor (solo para instructores)")
+
 
 
 def ejecutar_sistema():
     """Lee la opción del usuario y llama la función correspondiente."""
     while True:
         mostrar_menu()
-        opcion = input("\nSelecciona una opción (1-8): ").strip()
+        opcion = input("\nSelecciona una opción (1-9): ").strip()
 
         if opcion == "1":
             registrar_cliente()
@@ -74,9 +77,11 @@ def ejecutar_sistema():
         elif opcion == "8":
             print("\nSaliendo del sistema. ¡Hasta luego!")
             break
-            
+        elif opcion == "9":
+            id_instructor = input("Ingrese el ID del instructor: ").strip()
+            menu_instructor(id_instructor)
         else:
-            print("\nOpción inválida. Selecciona un número entre 1 y 8.")
+            print("\nOpción inválida. Selecciona un número entre 1 y 9.")
 
 
 if __name__ == "__main__":

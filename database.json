@@ -1,0 +1,10 @@
+{
+    "clientes": [
+        {
+            "id": "3443",
+            "nombre": "Luis Andres",
+            "estado": "Activo",
+            "riesgo": "Bajo"
+        }
+    ]
+}
