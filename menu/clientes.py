@@ -1,8 +1,6 @@
 import json
 import os
-from clientes import buscar_cliente_por_id
 
-buscar_cliente_por_id()
 DB_FILE = "database.json"
 
 def cargar_datos():
@@ -95,4 +93,25 @@ def buscar_cliente_por_id():
             return
 
     print(f"No se encontró un cliente con el ID {id_busqueda}.")
+
+def mostrar_resumen_por_estado():
+    """Cuenta cuántos clientes hay en cada estado."""
+    datos = cargar_datos()
+    clientes = datos.get("clientes", [])
+
+    if not clientes:
+        print("No hay clientes para resumir.")
+        return
+
+    conteo = {}
+
+    for cliente in clientes:
+        estado = cliente.get("estado", "Sin estado").strip().capitalize()
+        conteo[estado] = conteo.get(estado, 0) + 1
+
+    print("\nRESUMEN DE CLIENTES POR ESTADO")
+    print(f"Total de clientes: {len(clientes)}")
+
+    for estado, cantidad in conteo.items():
+        print(f"{estado}: {cantidad}")
 

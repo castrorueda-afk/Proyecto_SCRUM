@@ -1,6 +1,7 @@
 """Menú de consola del sistema ForceTech."""
 import sys
 from pathlib import Path
+from clientes import registrar_cliente, mostrar_resumen_por_estado
 
 # Agrega la carpeta principal del proyecto a la ruta de Python.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -48,7 +49,8 @@ def mostrar_menu():
     print("5. Ver reportes")
     print("6. Registrar progreso de cliente")
     print("7. Registrar servicios o instructores")
-    print("8. Salir")
+    print("8. Resumen de clientes por estado")
+    print("9. Salir")
 
 
 def ejecutar_sistema():
@@ -72,12 +74,12 @@ def ejecutar_sistema():
         elif opcion == "7":
             _menu_catalogos()
         elif opcion == "8":
+            mostrar_resumen_por_estado()
+            
+        elif opcion == "9":
             print("\nSaliendo del sistema. ¡Hasta luego!")
             break
-            
-        else:
-            print("\nOpción inválida. Selecciona un número entre 1 y 8.")
-
-
 if __name__ == "__main__":
     ejecutar_sistema()
+
+    
