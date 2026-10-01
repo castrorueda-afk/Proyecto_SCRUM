@@ -1,3 +1,4 @@
+import json
 def mostrar_servicios():
     with open("database.json","r") as servicio:
         lista =json.load(servicio)
@@ -6,4 +7,3 @@ def mostrar_servicios():
             print(f"Capacidad: {x['capacidad']}")
             print(f"Inscritos: {x['inscritos']}")
             print("----------------------")
-mostrar_servicios()
