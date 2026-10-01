@@ -1,6 +1,8 @@
 import json
 import os
+from clientes import buscar_cliente_por_id
 
+buscar_cliente_por_id()
 DB_FILE = "database.json"
 
 def cargar_datos():
@@ -75,3 +77,22 @@ def ver_prioridad():
         
     for c in clientes:
         print(f"ID: {c['id']} | Nombre: {c['nombre']} | Estado: {c['estado']} | Riesgo: {c['riesgo']}")
+
+def buscar_cliente_por_id():
+    """Busca y muestra un cliente usando su ID."""
+    datos = cargar_datos()
+    clientes = datos.get("clientes", [])
+
+    id_busqueda = input("Escribe el ID del cliente que quieres buscar: ").strip()
+
+    for cliente in clientes:
+        if str(cliente.get("id", "")) == id_busqueda:
+            print("\nCLIENTE ENCONTRADO")
+            print(f"ID: {cliente.get('id', 'Sin ID')}")
+            print(f"Nombre: {cliente.get('nombre', 'Sin nombre')}")
+            print(f"Estado: {cliente.get('estado', 'Sin estado')}")
+            print(f"Riesgo: {cliente.get('riesgo', 'Sin riesgo')}")
+            return
+
+    print(f"No se encontró un cliente con el ID {id_busqueda}.")
+
