@@ -1,0 +1,42 @@
+{
+    "clientes": [
+        {
+            "id": "3443",
+            "nombre": "Luis Andres",
+            "estado": "Activo",
+            "riesgo": "Bajo"
+        }
+    ],
+     "servicios": [
+        {
+            "id": 1,
+            "nombre": "Yoga",
+            "capacidad": 20,
+            "inscritos": 0
+        },
+        {
+            "id": 2,
+            "nombre": "Pilates",
+            "capacidad": 15,
+            "inscritos": 0
+        },
+        {
+            "id": 3,
+            "nombre": "Entrenamiento personalizado",
+            "capacidad": 10,
+            "inscritos": 0
+        },
+        {
+            "id": 4,
+            "nombre": "Piscina",
+            "capacidad": 25,
+            "inscritos": 0
+        },
+        {
+            "id": 5,
+            "nombre": "Gimnasio general",
+            "capacidad": 30,
+            "inscritos": 0
+        }
+    ]
+}
