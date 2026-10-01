@@ -45,6 +45,8 @@ En esta sección se documenta el progreso diario, las problemáticas encontradas
 * **Problemas presentados (Impedimentos):** 
   - Error de importación (`ImportError: cannot import name 'ver_prioridad'`) al intentar vincular el menú principal con el módulo secundario de clientes debido a la ausencia inicial de la función de consulta.
   - Se solucionó añadiendo e integrando correctamente la función `ver_prioridad()` en `clientes.py`, asegurando la sincronización de directorios de trabajo.
+  - <img width="1770" height="1027" alt="image" src="https://github.com/user-attachments/assets/e13a9157-4042-4ff7-a424-89e978d06d9d" />
+
 
 ### Día 4 y 5 - Actualización y Sincronización del Sistema
 * **¿Qué hicimos?** Consolidación definitiva del flujo del menú interactivo (opciones 1 a 5), pruebas de escritura y lectura en tiempo real sobre `database.json`, y resolución de estados de bloqueo en Git (`MERGE_HEAD` y limpieza de entornos locales).
