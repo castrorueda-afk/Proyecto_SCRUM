@@ -68,7 +68,7 @@ def ver_prioridad():
             datos = cargar_datos()
             clientes = datos.get("clientes", [])
     
-    print("\n--- LISTA DE CLIENTES Y ESTADOS ---")
+    print("\n LISTA DE CLIENTES Y ESTADOS ")
     if not clientes:
         print("No hay clientes registrados todavía.")
         return
