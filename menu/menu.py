@@ -14,10 +14,9 @@ from matriculas import (
 )
 from reportes import (
     mostrar_menu_reportes,
-    mostrar_servicios_y_capacidad,
     registrar_progreso,
 )
-
+from servicios import mostrar_servicios
 
 def _menu_catalogos():
     """Permite cargar los servicios y los instructores."""
@@ -65,7 +64,7 @@ def ejecutar_sistema():
         elif opcion == "2":
             print("\nControl de aforo todavía no está implementado.")
         elif opcion == "3":
-            mostrar_servicios_y_capacidad()
+            mostrar_servicios()
         elif opcion == "4":
             registrar_matricula()
         elif opcion == "5":
