@@ -63,3 +63,17 @@ Para mantener un historial limpio, el equipo utiliza el siguiente estándar para
 - `fix:` Corrección de errores (ej. `fix(json): solucionar lectura de archivo vacio`).
 - `docs:` Cambios en la documentación o README (ej. `docs(bitacora): actualizar bitacora del proyecto`).
 - `chore:` Tareas de mantenimiento o configuración (ej. `chore(setup): agregar archivo .gitignore`).
+- ## 📈 Evolución del Tablero SCRUM (Progreso del Proyecto)
+
+A lo largo de los Sprints, el equipo ha mantenido un seguimiento riguroso de las tareas, épicas y requerimientos mediante el tablero Kanban en **Monday.com**. A continuación, se muestra la evolución visual del flujo de trabajo desde la planificación inicial hasta la finalización de los componentes:
+
+### 1. Configuración y Planificación Inicial del Sprint
+En las primeras fases se definieron las épicas principales, el backlog del producto y la asignación inicial de tareas para cada integrante del equipo (Juan Manuel Castro, Eduardo Gamboa, Samid Andrés Plata y Andrés Vázquez).
+<img width="1641" height="851" alt="image" src="https://github.com/user-attachments/assets/0e4d6962-a8ea-46d5-b64a-9b31c90c40c2" />
+
+
+### 2. Tablero Actualizado y Tareas Finalizadas
+Con el avance de los días, la integración del código modular en Python (`menu.py`, `clientes.py` y `database.json`) y las pruebas continuas, las tarjetas del tablero se desplazaron progresivamente hacia la columna de **Hecho** (*Finalizada*), evidenciando el cumplimiento de los objetivos del Sprint.
+<img width="1915" height="906" alt="image" src="https://github.com/user-attachments/assets/677e713a-84db-4fb1-8dc6-bee94ca070b3" />
+link del cuadro de scrum:https://jmcastroruedas-team.monday.com/boards/18432853372/views/283078110
+
