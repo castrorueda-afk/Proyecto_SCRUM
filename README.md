@@ -76,4 +76,30 @@ En las primeras fases se definieron las épicas principales, el backlog del prod
 Con el avance de los días, la integración del código modular en Python (`menu.py`, `clientes.py` y `database.json`) y las pruebas continuas, las tarjetas del tablero se desplazaron progresivamente hacia la columna de **Hecho** (*Finalizada*), evidenciando el cumplimiento de los objetivos del Sprint.
 <img width="1915" height="906" alt="image" src="https://github.com/user-attachments/assets/677e713a-84db-4fb1-8dc6-bee94ca070b3" />
 link del cuadro de scrum:https://jmcastroruedas-team.monday.com/boards/18432853372/views/283078110
+## 👥 Gestión de Roles SCRUM y Funciones del Equipo
+
+Dentro del marco de trabajo ágil, la distribución de responsabilidades y la supervisión del proceso se estructuraron de la siguiente manera:
+
+* **Juan Manuel Castro (Scrum Master y Product Owner):** Encargado de facilitar las ceremonias ágiles, eliminar los bloqueos e impedimentos técnicos (como la resolución de conflictos en Git y bloqueos de terminal), gestionar la estructura de la base de datos en formato JSON y asegurar que el desarrollo cumpliera con las pautas de la rúbrica del proyecto.
+* **Eduardo Gamboa (Development Team):** Responsable del desarrollo, validaciones y lógica principal del módulo de gestión de clientes.
+* **Samid Andrés Plata (Development Team):** Encargado del diseño, implementación y control de aforo del módulo de servicios del gimnasio.
+* **Andrés Vázquez (Development Team):** Responsable de la estructuración de matrículas y la generación de reportes del sistema.
+
+---
+
+## 📞 Evidencia de Ceremonias y Reuniones de Sprints (Daily Stand-ups)
+
+Para garantizar la sincronización continua, la resolución de impedimentos y la revisión de avances, el equipo realizó reuniones de seguimiento y coordinación mediante canales de voz y video en equipo. 
+
+A continuación se muestran las evidencias de las conexiones y ceremonias realizadas:
+
+* **Sincronización y Daily Stand-up en equipo:** Registro de las sesiones de trabajo colaborativo para alinear los avances del código modular y la integración de ramas.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/14dd7f35-174b-494f-bfde-917bbe9e3526" />
+
+* **Revisión y depuración en conjunto:** Sesión de revisión de código y solución de errores de importación y rutas de persistencia.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4b1b5e6f-6bd0-409c-a0b9-cc711cd57699" />
+
+* **Cierre y verificación de Sprint:** Encuentro final para constatar el estado de las tareas y preparar los entregables finales.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/55242acc-8c12-4c0b-81f2-4e20b4bac96e" />
+
 
